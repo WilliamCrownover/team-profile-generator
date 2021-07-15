@@ -2,39 +2,45 @@ const Engineer = require("../lib/Engineer");
 
 describe("Engineer class", () => {
     describe("Constructor", () => {
-        it("Should create an object with 'name', 'id', 'email', and 'github' properties set to the arguments provided", () => {
-            const name = "employeeName";
-            const id = 1;
-            const email = "email@email.com";
-            const github = "githubName"
-            const obj = new Engineer(name, id, email, github);
+        it("Should create an object with 'name', 'id', 'email', and 'github' properties set to the properties provided by an object", () => {
+            const engineer = {
+                name: "employeeName",
+                id: 1,
+                email: "email@email.com",
+                github: "githubName"
+            }
+            const obj = new Engineer(engineer);
 
-            expect(obj.name).toEqual(name);
-            expect(obj.id).toEqual(id);
-            expect(obj.email).toEqual(email);
-            expect(obj.github).toEqual(github);
+            expect(obj.name).toEqual(engineer.name);
+            expect(obj.id).toEqual(engineer.id);
+            expect(obj.email).toEqual(engineer.email);
+            expect(obj.github).toEqual(engineer.github);
         });
     });
 
     describe("getGithub", () => {
         it("Should return the github username of the engineer", () => {
-            const name = "employeeName";
-            const id = 1;
-            const email = "email@email.com";
-            const github = "githubName"
-            const obj = new Engineer(name, id, email, github);
+            const engineer = {
+                name: "employeeName",
+                id: 1,
+                email: "email@email.com",
+                github: "githubName"
+            }
+            const obj = new Engineer(engineer);
 
-            expect(obj.getGithub()).toEqual(github);
+            expect(obj.getGithub()).toEqual(engineer.github);
         });
     });
 
     describe("getRole", () => {
         it("Should return the role of the employee", () => {
-            const name = "employeeName";
-            const id = 1;
-            const email = "email@email.com";
-            const github = "githubName"
-            const obj = new Engineer(name, id, email, github);
+            const engineer = {
+                name: "employeeName",
+                id: 1,
+                email: "email@email.com",
+                github: "githubName"
+            }
+            const obj = new Engineer(engineer);
 
             expect(obj.getRole()).toEqual("Engineer");
         });
