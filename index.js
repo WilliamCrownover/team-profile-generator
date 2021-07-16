@@ -84,6 +84,7 @@ const internQuestions = [
 
 // Stored team members array
 let teamMembers = [];
+let cardsString = "";
 
 // Ask the user for info on an engineer team member
 const askforEngineerInfo = () => {
@@ -123,6 +124,79 @@ const askforNextTeamMember = () => {
         });
 }
 
+const renderHTMLStart = () => {
+    return fs.readFileSync("./src/start.html", "utf8", (err, data) => {
+        if(err) {
+            console.error(err);
+            return;
+        }
+        return data;
+    });
+}
+
+const readCard = (type) => {
+    return fs.readFileSync(`./src/${type}Card.html`, "utf8", (err, data) => {
+        if(err) {
+            console.error(err);
+            return;
+        }
+        return data;
+    });
+}
+
+const replaceDataValues = (obj, string) => {
+    string = string.replace("[NAME]", obj.getName());
+    string = string.replace("[IDNUMBER]", obj.getId());
+    string = string.replace("[EMAIL]", obj.getEmail());
+    string = string.replace("[EMAIL]", obj.getEmail());
+    return string;
+}
+
+const renderHTMLCards = () => {
+    cardsString = "";
+    for(let i = 0; i < teamMembers.length; i++) {
+        let appendCard = "";
+        const employeeType = teamMembers[i].constructor.name;
+        switch(employeeType) {
+            case "Manager":
+                appendCard = readCard(employeeType);
+                appendCard = appendCard.replace("[OFFICENUMBER]", teamMembers[i].getOfficeNumber());
+                break;
+            case "Engineer":
+                appendCard = readCard(employeeType);
+                appendCard = appendCard.replace("[GITHUB]", teamMembers[i].getGithub());
+                appendCard = appendCard.replace("[GITHUB]", teamMembers[i].getGithub());
+                break;
+            case "Intern":
+                appendCard = readCard(employeeType);
+                appendCard = appendCard.replace("[SCHOOLNAME]", teamMembers[i].getSchool());
+                break;
+        }
+        cardsString += replaceDataValues(teamMembers[i], appendCard);
+    }
+    return cardsString;
+}
+
+const renderHTMLEnd = () => {
+    return fs.readFileSync("./src/end.html", "utf8", (err, data) => {
+        if(err) {
+            console.error(err);
+            return;
+        }
+        return data;
+    });
+}
+
+const generateHTML = () => {
+    return renderHTMLStart() +
+        renderHTMLCards() +
+        renderHTMLEnd();
+}
+
+const writeToFile = (fileName, string) => {
+    fs.writeFile(`./dist/${fileName}`, string, (err) => err ? console.error(err) : console.log('Success!'));
+}
+
 // Initialize the question process
 const init = () => {
     inquirer
@@ -134,7 +208,12 @@ const init = () => {
         })
         .then(() => {
             console.log(teamMembers);
+            const htmlString = generateHTML();
+            writeToFile("index.html", htmlString);
         })
+        .catch((error) => {
+            console.log(error);
+        });
 };
 
 init();
