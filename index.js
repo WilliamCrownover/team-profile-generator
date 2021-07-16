@@ -193,6 +193,16 @@ const generateHTML = () => {
         renderHTMLEnd();
 }
 
+const generateCSS = () => {
+    return fs.readFileSync("./src/style.css", "utf8", (err, data) => {
+        if(err) {
+            console.error(err);
+            return;
+        }
+        return data;
+    });
+}
+
 const writeToFile = (fileName, string) => {
     fs.writeFile(`./dist/${fileName}`, string, (err) => err ? console.error(err) : console.log('Success!'));
 }
@@ -207,9 +217,10 @@ const init = () => {
             return askforNextTeamMember();
         })
         .then(() => {
-            console.log(teamMembers);
             const htmlString = generateHTML();
             writeToFile("index.html", htmlString);
+            const cssString = generateCSS();
+            writeToFile("style.css", cssString);
         })
         .catch((error) => {
             console.log(error);
