@@ -32,6 +32,48 @@ describe("Engineer class", () => {
         });
     });
 
+    describe("getName", () => {
+        it("Should return the name of the employee", () => {
+            const engineer = {
+                name: "employeeName",
+                id: 1,
+                email: "email@email.com",
+                github: "githubName"
+            }
+            const obj = new Engineer(engineer);
+
+            expect(obj.getName()).toEqual(engineer.name);
+        });
+    });
+
+    describe("getId", () => {
+        it("Should return the id of the employee", () => {
+            const engineer = {
+                name: "employeeName",
+                id: 1,
+                email: "email@email.com",
+                github: "githubName"
+            }
+            const obj = new Engineer(engineer);
+
+            expect(obj.getId()).toEqual(engineer.id);
+        });
+    });
+
+    describe("getEmail", () => {
+        it("Should return the email of the employee", () => {
+            const engineer = {
+                name: "employeeName",
+                id: 1,
+                email: "email@email.com",
+                github: "githubName"
+            }
+            const obj = new Engineer(engineer);
+
+            expect(obj.getEmail()).toEqual(engineer.email);
+        });
+    });
+
     describe("getRole", () => {
         it("Should return the role of the employee", () => {
             const engineer = {

@@ -32,6 +32,48 @@ describe("Intern class", () => {
         });
     });
 
+    describe("getName", () => {
+        it("Should return the name of the employee", () => {
+            const intern = {
+                name: "employeeName",
+                id: 1,
+                email: "email@email.com",
+                school: "schoolName"
+            }
+            const obj = new Intern(intern);
+
+            expect(obj.getName()).toEqual(intern.name);
+        });
+    });
+
+    describe("getId", () => {
+        it("Should return the id of the employee", () => {
+            const intern = {
+                name: "employeeName",
+                id: 1,
+                email: "email@email.com",
+                school: "schoolName"
+            }
+            const obj = new Intern(intern);
+
+            expect(obj.getId()).toEqual(intern.id);
+        });
+    });
+
+    describe("getEmail", () => {
+        it("Should return the email of the employee", () => {
+            const intern = {
+                name: "employeeName",
+                id: 1,
+                email: "email@email.com",
+                school: "schoolName"
+            }
+            const obj = new Intern(intern);
+
+            expect(obj.getEmail()).toEqual(intern.email);
+        });
+    });
+
     describe("getRole", () => {
         it("Should return the role of the employee", () => {
             const intern = {
