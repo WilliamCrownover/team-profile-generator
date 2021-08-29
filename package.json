@@ -21,6 +21,7 @@
     "inquirer": "^8.1.2"
   },
   "devDependencies": {
+    "eslint": "^7.32.0",
     "jest": "^27.0.6"
   }
 }
